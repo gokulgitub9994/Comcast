@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-04-23T12:45:48 IST" name="Default suite" finished-at="2025-04-23T12:46:01 IST" duration-ms="13087">
+    <groups>
+      <group name="RT">
+        <method signature="CreateContactWithSupportDate.createContactWithDate()[pri:0, instance:CreateContactTest.CreateContactWithSupportDate@44c03695]" name="createContactWithDate" class="CreateContactTest.CreateContactWithSupportDate"/>
+      </group> <!-- RT -->
+    </groups>
+    <test started-at="2025-04-23T12:45:48 IST" name="Default test" finished-at="2025-04-23T12:46:01 IST" duration-ms="13087">
+      <class name="CreateContactTest.CreateContactWithSupportDate">
+        <test-method signature="createContactWithDate()[pri:0, instance:CreateContactTest.CreateContactWithSupportDate@44c03695]" started-at="2025-04-23T12:45:48 IST" name="createContactWithDate" finished-at="2025-04-23T12:46:01 IST" duration-ms="13027" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createContactWithDate -->
+      </class> <!-- CreateContactTest.CreateContactWithSupportDate -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
