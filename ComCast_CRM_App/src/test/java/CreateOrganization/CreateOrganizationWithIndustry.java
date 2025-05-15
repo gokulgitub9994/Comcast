@@ -1,10 +1,10 @@
-package CreateOrganizationTest;
+package CreateOrganization;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.Test;
 
 import com.comcast.crm.generic.fileutility.ExcelUtility;
 import com.comcast.crm.generic.fileutility.FileUtility;
@@ -16,10 +16,9 @@ import com.comcast.crm.generic.objectrepositaroryutility.OrganizationPage;
 import com.comcast.crm.generic.webdriverutility.JavaUtility;
 import com.comcast.crm.generic.webdriverutility.WebDriverUtility;
 
-public class CreateOrganizationtest {
+public class CreateOrganizationWithIndustry {
 
-	@Test(groups="ST")
-	public void createOrganizationTest() throws Throwable {
+	public static void main(String[] args) throws Throwable {
 
 		WebDriver driver = null;
 
@@ -36,6 +35,8 @@ public class CreateOrganizationtest {
 		String orgname = eLib.getDataFromExcel("org", 1, 2) + jLib.getRandomNumber(1000);
 		System.out.println(orgname + " :OrgName going to be created");
 
+		String industryname = eLib.getDataFromExcel("org", 2, 3);
+		System.out.println(industryname + "  type industry is created");
 		if (BROWSER.equals("chrome")) {
 			driver = new ChromeDriver();
 		} else if (BROWSER.equals("firefox")) {
@@ -66,21 +67,21 @@ public class CreateOrganizationtest {
 		// Enter all details
 		CreatingNewOrganizationPage cnop = new CreatingNewOrganizationPage(driver);
 		cnop.getOrgNameEdit().sendKeys(orgname);
+		WebElement industrydrop = cnop.getIndustryDropDown();
+		wLib.select(industrydrop, industryname);
 		cnop.getSaveBtn().click();
 
-		// Verify the HeaderMsg
-		String expectedOrgname = orgname;
+		// verify created org based on industry
+		String expectedIndustry = industryname;
 		OrganizationInfoPage oip = new OrganizationInfoPage(driver);
-		String actuaOrgnmae = oip.getHeaderMsg().getText();
-
-		if (actuaOrgnmae.contains(expectedOrgname)) {
-			System.out.println(expectedOrgname + ": is verified  ===> PASSS");
+		String actIndustry = oip.getIndustryEdit().getText();
+		if (actIndustry.contains(industryname)) {
+			System.out.println(industryname + " is verified ====> PASS");
 		} else {
-			System.out.println(expectedOrgname + ": is not  verified  ===> FAIL");
+			System.out.println(industryname + " is not  verified ====> FAIL");
 		}
 
 		driver.quit();
-
 	}
 
 }

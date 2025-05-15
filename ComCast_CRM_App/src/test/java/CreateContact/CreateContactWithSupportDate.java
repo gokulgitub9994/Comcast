@@ -1,4 +1,4 @@
-package CreateContactTest;
+package CreateContact;
 import java.io.IOException;
 
 import org.json.simple.parser.ParseException;

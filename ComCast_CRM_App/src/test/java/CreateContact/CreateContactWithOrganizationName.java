@@ -1,18 +1,16 @@
-package CreateContactTest;
+package CreateContact;
 
+import java.util.Set;
 
-
-import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.Test;
 
 import com.comcast.crm.generic.fileutility.ExcelUtility;
 import com.comcast.crm.generic.fileutility.FileUtility;
 import com.comcast.crm.generic.fileutility.JsonUtility;
-import com.comcast.crm.generic.objectrepositaroryutility.ContactInfoPage;
+import com.comcast.crm.generic.objectrepositaroryutility.ContactOrgPage;
 import com.comcast.crm.generic.objectrepositaroryutility.ContactPage;
 import com.comcast.crm.generic.objectrepositaroryutility.CreatingNewContactPage;
 import com.comcast.crm.generic.objectrepositaroryutility.HomePage;
@@ -20,10 +18,9 @@ import com.comcast.crm.generic.objectrepositaroryutility.LoginPage;
 import com.comcast.crm.generic.webdriverutility.JavaUtility;
 import com.comcast.crm.generic.webdriverutility.WebDriverUtility;
 
-public class CreateContactTest {
+public class CreateContactWithOrganizationName {
 
-	@Test(groups="ST")
-	public void createContactTest() throws Throwable, ParseException {
+	public static void main(String[] args) throws Throwable {
 		WebDriver driver = null;
 
 		FileUtility fLib = new FileUtility();
@@ -62,20 +59,19 @@ public class CreateContactTest {
 
 		CreatingNewContactPage cncp = new CreatingNewContactPage(driver);
 		String lastName = eLib.getDataFromExcel("contact", 1, 2) + jLib.getRandomNumber(1000);
+		String orgname = eLib.getDataFromExcel("contact", 3, 3);
 		System.out.println("Contact name going to be created is :" + lastName);
 		cncp.getLastNameEdit().sendKeys(lastName);
+		cncp.getOrgNameEdit().click();
+
+		wLib.switchToTabOnUrl(driver, "Accounts&action");
+		ContactOrgPage cop = new ContactOrgPage(driver);
+		cop.getOrgSearchTextField().sendKeys(orgname);
+		cop.getSearchNowBtn().click();
+		cop.getOrgNameLink().click();
+		wLib.switchToTabOnUrl(driver, "Marketing");
 		cncp.getSaveBtn().click();
 
-		ContactInfoPage cip = new ContactInfoPage(driver);
-		String expectedContactName = lastName;
-		String actualContactName = cip.getHeaderMsg().getText();
-		if (actualContactName.contains(expectedContactName)) {
-			System.out.println("Contact name created is :" + lastName);
-			System.out.println(lastName + " :is verified =====> PASS");
-		} else {
-			System.out.println(lastName + " :is not verified =====> FAIL");
-		}
-
-		driver.quit();
 	}
+
 }
