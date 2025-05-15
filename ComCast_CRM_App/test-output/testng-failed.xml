@@ -3,14 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="extend_report.MultipleTestCases">
+      <class name="CreateContactTest.CreateContactTest">
         <methods>
-          <include name="beforeConfig"/>
           <include name="createContactTest"/>
-          <include name="createContactWithPhoneNumTest"/>
-          <include name="afterConfig"/>
         </methods>
-      </class> <!-- extend_report.MultipleTestCases -->
+      </class> <!-- CreateContactTest.CreateContactTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

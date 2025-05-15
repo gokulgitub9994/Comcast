@@ -7,8 +7,8 @@
         <methods>
           <include name="configAfterSuite"/>
           <include name="configBeforeClass"/>
-          <include name="configAfterMethod"/>
           <include name="configAfterClass"/>
+          <include name="configAfterMethod"/>
           <include name="configBeforeMethod"/>
           <include name="configBeforeSuite"/>
           <include name="addProductToCartTest"/>
